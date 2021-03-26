@@ -1,0 +1,21 @@
+ul {
+    list-style: none;
+}
+
+.nav-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-container div {
+    margin: 1em;
+}
+
+.nav-container a {
+    margin: 0.5em;
+}
+
+.fa-smile{
+    font-size: 2em;
+}
