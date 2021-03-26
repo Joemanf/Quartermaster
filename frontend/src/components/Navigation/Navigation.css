@@ -1,6 +1,4 @@
-ul {
-    list-style: none;
-}
+
 
 .nav-container{
     display: flex;
@@ -8,6 +6,28 @@ ul {
     justify-content: space-between;
 }
 
+.button-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 1em;
+}
+
+.profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: end;
+    padding: .5em;
+    border: 1px solid black;
+    height: 4em;
+    /* transition: margin-top .25s; */
+}
+
+.profile-dropdown:active {
+    transition: margin-top 3s;
+}
+/* 
 .nav-container div {
     margin: 1em;
 }
@@ -19,3 +39,23 @@ ul {
 .fa-smile{
     font-size: 2em;
 }
+
+.profile-dropdown{
+    padding: 0;
+}
+
+.profile-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 1em;
+}
+
+.profile-box ul {
+    text-align: end;
+}
+
+.profile-button{
+    width: 3em;
+    height: 3em;
+} */
