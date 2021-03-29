@@ -86,6 +86,12 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function (models) {
     // associations can be defined here
+    const columnMapping = {
+      through: 'UserTag', // This is the model name referencing the join table.
+      otherKey: 'tagId',
+      foreignKey: 'userId'
+    }
+    User.belongsToMany(models.Tag, columnMapping);
   };
   return User;
 };
