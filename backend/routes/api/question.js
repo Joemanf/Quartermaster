@@ -3,7 +3,6 @@ const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie } = require('../../utils/auth');
 const { Question } = require('../../db/models');
 
 const router = express.Router();
@@ -33,7 +32,6 @@ router.post(
 
         if (validatorErrors.isEmpty()) {
             await question.save();
-            // res.redirect(`/question/${question.id}`);
             return res.json({ question })
         } else {
             const err = new Error('Post failed');

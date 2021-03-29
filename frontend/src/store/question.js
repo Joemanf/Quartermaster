@@ -29,8 +29,7 @@ export const viewQuestion = () => async dispatch => {
 }
 
 export const postQuestion = ({ title, body, userId }) => async dispatch => {
-    // const { title, body } = question;
-    // try {
+
     const res = await csrfFetch('/api/question', {
         method: 'POST',
         body: JSON.stringify({
@@ -41,15 +40,10 @@ export const postQuestion = ({ title, body, userId }) => async dispatch => {
     })
     const data = await res.json();
     if (res.ok) {
-        console.log(data.question)
         dispatch(askQuestion(data.question));
         return res;
     }
     else return false;
-    // }
-    // catch (e) {
-    //     return e;
-    // }
 }
 
 //REDUCER
