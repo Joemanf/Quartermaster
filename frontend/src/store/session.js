@@ -4,12 +4,22 @@ import { csrfFetch } from './csrf';
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
+// ACTIONS
+
 const setUser = (user) => {
     return {
-        type: SET_USER,
+        type: SET_USER, // Connects to switch below
         payload: user,
     };
 };
+
+const removeUser = () => {
+    return {
+        type: REMOVE_USER, // Connects to switch below
+    };
+};
+
+//THUNKS
 
 export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('/api/session');
@@ -17,12 +27,6 @@ export const restoreUser = () => async dispatch => {
     dispatch(setUser(data.user));
     return response;
 }
-
-const removeUser = () => {
-    return {
-        type: REMOVE_USER,
-    };
-};
 
 export const login = (user) => async (dispatch) => {
     const { credential, password } = user;
@@ -61,6 +65,8 @@ export const logout = () => async (dispatch) => {
     return response;
 };
 
+//REDUCER
+
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
@@ -79,4 +85,4 @@ const sessionReducer = (state = initialState, action) => {
     }
 };
 
-export default sessionReducer;
+export default sessionReducer; // Goes to store/index.js
