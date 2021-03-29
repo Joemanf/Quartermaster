@@ -1,9 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Answer = sequelize.define('Answer', {
-    body: DataTypes.TEXT,
-    userId: DataTypes.INTEGER,
-    questionId: DataTypes.INTEGER
+    name: DataTypes.STRING
   }, {});
   Answer.associate = function(models) {
     // associations can be defined here
