@@ -1,9 +1,16 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const QuestionTag = sequelize.define('QuestionTag', {
-    name: DataTypes.STRING
+    questionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    tagId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   }, {});
-  QuestionTag.associate = function(models) {
+  QuestionTag.associate = function (models) {
     // associations can be defined here
   };
   return QuestionTag;
