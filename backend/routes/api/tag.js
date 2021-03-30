@@ -7,6 +7,12 @@ const { User, Tag, UserTag } = require('../../db/models');
 
 const router = express.Router();
 
+// Get all of the tags 
+router.get('/', async (req, res) => {
+    const tags = await Tag.findAll(); // Problem is here
+    return res.json(tags) // Goes to the store
+})
+
 // Create a tag association for users
 router.post(
     '/:id',
@@ -19,7 +25,7 @@ router.post(
 
         if (userTag) {
             await userTag.save();
-            return res.json({ userTag })
+            return res.json({ userTag }) // Goes to the store
         } else {
             const err = new Error('Post failed');
             err.status = 401;

@@ -3,10 +3,14 @@ import thunk from "redux-thunk";
 
 import sessionReducer from './session'
 import questionReducer from './question'
+import tagReducer from "./tag";
+
+
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   question: questionReducer,
+  tag: tagReducer,
 });
 
 let enhancer;

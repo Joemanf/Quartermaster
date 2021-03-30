@@ -19,22 +19,24 @@ const askQuestion = (question) => {
 //     }
 // }
 
+
 // THUNKS
 
-export const viewQuestion = () => async dispatch => {
-    const res = await csrfFetch('/api/question');
-    const data = await res.json();
-    dispatch(askQuestion(data.question));
-    return res;
-}
+// export const viewQuestion = () => async dispatch => {
+//     const res = await csrfFetch('/api/question');
+//     const data = await res.json();
+//     dispatch(askQuestion(data.question));
+//     return res;
+// }
 
-export const postQuestion = ({ title, body, userId }) => async dispatch => {
+export const postQuestion = ({ title, body, tagIds, userId }) => async dispatch => {
 
     const res = await csrfFetch('/api/question', {
         method: 'POST',
         body: JSON.stringify({
             title,
             body,
+            tagIds,
             userId
         })
     })
@@ -45,6 +47,7 @@ export const postQuestion = ({ title, body, userId }) => async dispatch => {
     }
     else return false;
 }
+
 
 //REDUCER
 

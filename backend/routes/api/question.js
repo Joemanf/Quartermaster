@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
-const { Question } = require('../../db/models');
+const { Question, QuestionTag } = require('../../db/models');
 
 const router = express.Router();
 
@@ -24,15 +24,24 @@ router.post(
     '/',
     validateQuestion,
     asyncHandler(async (req, res, next) => {
-        const { title, body, userId } = req.body;
+        const { title, body, tagIds, userId } = req.body;
+
+        console.log(req.body)
 
         const question = Question.build({ title, body, userId });
+
 
         const validatorErrors = validationResult(req);
 
         if (validatorErrors.isEmpty()) {
             await question.save();
-            return res.json({ question })
+            console.log(`Sweet Berries`, question)
+            tagIds.map(async (questionNum) => {
+                const questionTags = QuestionTag.build({ questionId: question.id, tagId: questionNum });
+                await questionTags.save();
+            })
+
+            return res.json({ question }) // Goes to the store
         } else {
             const err = new Error('Post failed');
             err.status = 401;
