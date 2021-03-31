@@ -36,4 +36,18 @@ router.post(
     }),
 );
 
+router.delete(
+    '/:id',
+    asyncHandler(async (req, res, next) => {
+        const tagId = req.params.id;
+        const userId = req.body.userId;
+
+        const deleteUserTag = await UserTag.findAll({
+            where: { userId, tagId }
+        })
+        deleteUserTag.map(async (userTag) => await userTag.destroy())
+        return res.json('deleted');
+    })
+)
+
 module.exports = router;

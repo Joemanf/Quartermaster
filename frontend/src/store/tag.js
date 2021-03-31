@@ -23,22 +23,38 @@ const load = list => {
 
 // THUNKS
 
-export const postUserTag = ({ name, userId }) => async dispatch => {
+export const postUserTag = (userId, tagId) => async dispatch => {
 
-    let sef = 'hey'
-    const res = await csrfFetch(`/api/tag/${sef}`, { // <-- Has to be tag id
+
+    const res = await csrfFetch(`/api/tag/${tagId}`, {
         method: 'POST',
         body: JSON.stringify({
-            name,
+            // name,
             userId
         })
     })
-    const data = await res.json();
     if (res.ok) {
-        dispatch(associateUserTag(data.something)); // Figure out what "something" is
+        const data = await res.json();
+        console.log(data) // This is where I was, go into the reducer
+        // dispatch(associateUserTag(data.userTag));
         return res;
     }
     else return false;
+}
+
+export const deleteUserTag = (tagId, userId) => async dispatch => {
+    const res = await csrfFetch(`/api/tag/${tagId}`, { // Change route
+        method: "DELETE",
+        body: JSON.stringify({
+            tagId,
+            userId
+        }),
+        headers: { "Content-Type": "application/json" },
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+    }
 }
 
 export const showAllTags = () => async dispatch => {
@@ -67,23 +83,16 @@ const tagReducer = (state = initialState, action) => {
             return newState;
         case REMOVE_USERTAG:
             newState = Object.assign({}, state);
-            newState.question = null;
+            newState.tag = null;
             return newState;
         case LOAD: {
-            // console.log(`Hit in load`)
             const allTags = {};
             action.list.forEach(tag => {
                 allTags[tag.id] = tag;
             });
-            // console.log({
-            //     ...allTags,
-            //     ...state,
-            //     // list: sortList(action.list),
-            // })
             return {
                 ...allTags,
                 ...state,
-                // list: sortList(action.list),
             };
         }
         default:
