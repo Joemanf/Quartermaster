@@ -9,9 +9,18 @@ const router = express.Router();
 
 // Get all of the tags 
 router.get('/', async (req, res) => {
-    const tags = await Tag.findAll(); // Problem is here
+    const tags = await Tag.findAll();
     return res.json(tags) // Goes to the store
 })
+
+// Grab all usertags for front end to evaluate what tags are followed
+router.post('/usertags', asyncHandler(async (req, res) => {
+    const { userId } = req.body;
+    const userTags = await UserTag.findAll({
+        where: { userId }
+    })
+    return res.json(userTags); // Goes to the store
+}))
 
 // Create a tag association for users
 router.post(
@@ -36,6 +45,7 @@ router.post(
     }),
 );
 
+// Delete a tag association for users
 router.delete(
     '/:id',
     asyncHandler(async (req, res, next) => {
