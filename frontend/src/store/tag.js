@@ -49,6 +49,22 @@ export const showAllTags = () => async (dispatch) => {
     } else return false
 }
 
+export const showAllUserTags = (userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/tag/grab-user-tag`, {
+        method: 'POST',
+        body: JSON.stringify({
+            userId,
+        }),
+    });
+    console.log(`USER TAGS RES`, res)
+    if (res.ok) {
+        const list = await res.json()
+        console.log(`------------------`, list)
+        dispatch(showUserTags(list))
+        return list
+    } else return false
+}
+
 export const postUserTag = (userId, tagId) => async (dispatch) => {
     const res = await csrfFetch(`/api/tag/userTags`, {
         method: 'POST',
@@ -95,27 +111,22 @@ const tagReducer = (state = initialState, action) => {
             action.list.forEach((tag) => {
                 allTags[tag.id] = tag
             })
-            return {
+            return { // And look around here
                 ...allTags,
                 ...state,
             }
         case ASSOCIATE_USERTAG:
-            newState = Object.assign({}, state)
-            // let nextState = Object.values(newState)
-            // nextState.forEach(tag => {
-
-            // })
-            // newState[action.tag.tagId]
+            newState = Object.assign({}, state) // Look here
             newState[action.tag.tagId].userId = action.tag.userId
-            // console.log('in the tag reducer with states', newState)
             return newState
 
         case SHOW_USERTAGS:
             const allUserTags = {}
+            allUserTags.userTags = {}
             // console.log(`ACTION PAYLOAD`, action.payload)
             action.payload.forEach((tag) => {
                 // console.log(tag)
-                allUserTags[tag.tagId] = tag
+                allUserTags.userTags[tag.tagId] = tag
             })
             return {
                 ...allUserTags,

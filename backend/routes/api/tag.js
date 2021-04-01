@@ -13,17 +13,28 @@ router.get('/', async (req, res) => {
     return res.json(tags) // Goes to the store
 })
 
-router.post(
+router.post( // Look at this
     '/userTags',
     asyncHandler(async (req, res) => {
-        const { userId, tagId } = req.body
+
+        //1. Query Tags table
+        //2. If tag and user association exists, send it back?
+        //2.5 Might have something to do with assigning userId
+        //3. Else create and send new one
+        const { userId, tagId } = req.body // Query tags table
+
+        const tags = await Tag.findAll({
+            where: { id: tagId }
+        })
+        console.log(`AAAAAAAAAAAAAAAAAAAAAAAAA`, tags)
+
         const userTag = await UserTag.create({ tagId, userId })
         if (userTag) return res.json({ userTag })
     })
 )
 
 // Grab all usertags for front end to evaluate what tags are followed
-router.post('/usertags', asyncHandler(async (req, res) => {
+router.post('/grab-user-tag', asyncHandler(async (req, res) => {
     const { userId } = req.body;
     const userTags = await UserTag.findAll({
         where: { userId }

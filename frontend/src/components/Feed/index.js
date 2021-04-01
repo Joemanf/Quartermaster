@@ -8,6 +8,7 @@ import {
     deleteUserTag,
     showAllTags,
 } from '../../store/tag'
+import Questions from '../Questions'
 
 function Feed() {
     // const [showModal, setShowModal] = useState(false);
@@ -19,16 +20,17 @@ function Feed() {
 
     // const userId = useSelector(state => state.session.user.id);
 
-    const everyTag = useSelector((state) => Object.values(state.tag))
+    const everyTag = useSelector((state) => Object.values(state.tag));
     const userId = useSelector((state) => state.session.user?.id)
 
-    console.log(`EVERY USER TAG`, everyTag, 'userId', userId)
+    // console.log(`EVERY USER TAG`, everyTag, 'userId', userId)
 
     // const tagFollows = {};
 
     return (
         <>
             <TagButtons everyTag={everyTag} userId={userId} />
+            <Questions userId={userId} />
         </>
     )
 }

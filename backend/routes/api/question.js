@@ -1,8 +1,13 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
+const { jwtConfig } = require('../../config');
+
+const { secret, expiresIn } = jwtConfig;
 
 const { handleValidationErrors } = require('../../utils/validation');
+const { getCurrentUserId } = require('../../utils/auth');
 const { Question, QuestionTag, UserTag } = require('../../db/models');
 
 const router = express.Router();
@@ -29,9 +34,28 @@ router.get('/', asyncHandler(async (req, res) => {
     // console.log(token)
     // res.json({ req })
 
+    const id = await getCurrentUserId(req);
+
+    const userTags = await UserTag.findAll({
+        where: { userId: id }
+    })
+
+    console.log(`User time? Yes? Please?`, userTags)
     const questions = await Question.findAll({
-        // where: tagId
+        // include: { Users }
+        // where: { id: tagId }
     });
+
+    return res.json(questions)
+}))
+
+router.get('/:id', asyncHandler(async (req, res) => {
+
+    const id = req.params.id;
+
+    const question = await Question.findByPk(id);
+
+    return res.json(question)
 }))
 
 // Post a question
