@@ -1,57 +1,36 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { showAllTags } from "../../store/tag";
-import { getUserTags, postUserTag, deleteUserTag } from "../../store/userTag";
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import TagButtons from '../TagButtons/index'
+import {
+    getUserTags,
+    postUserTag,
+    deleteUserTag,
+    showAllTags,
+} from '../../store/tag'
 
 function Feed() {
     // const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(showAllTags());
+        dispatch(showAllTags())
     }, [dispatch])
 
-    const userId = useSelector(state => state.session.user.id);
+    // const userId = useSelector(state => state.session.user.id);
 
-    const everyTag = useSelector(state => state.tag);
+    const everyTag = useSelector((state) => Object.values(state.tag))
+    const userId = useSelector((state) => state.session.user?.id)
 
-    let tagsArr = [];
-    for (const key in everyTag) {
-        tagsArr.push(everyTag[key])
-    }
-
-    const everyUserTag = useSelector(state => state.userTag)
-
-    console.log(`EVERY USER TAG`, everyUserTag)
-
-    useEffect(() => {
-        dispatch(getUserTags(userId))
-    }, [dispatch])
+    console.log(`EVERY USER TAG`, everyTag, 'userId', userId)
 
     // const tagFollows = {};
 
     return (
         <>
-            <div>
-                {tagsArr.map(tag => {
-
-                    return (
-                        <>
-                            <button
-                                id={`tag_button_${tag.id}`}
-                                value={tag.id}
-                                onClick={(e) => {
-                                    dispatch(postUserTag(userId, e.target.value))
-                                }}
-                                key={tag.id}
-                            >{tag.name}</button>
-                            < button key={`delete_${tag.id}`} onClick={e => dispatch(deleteUserTag(userId, tag.id))}>{`Unfollow ${tag.name}`}</button>
-                        </>
-                    )
-                })}
-            </div>
+            <TagButtons everyTag={everyTag} userId={userId} />
         </>
-    );
+    )
 }
 
-export default Feed;
+export default Feed

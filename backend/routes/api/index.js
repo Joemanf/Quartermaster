@@ -1,15 +1,17 @@
-const router = require('express').Router();
-const sessionRouter = require('./session.js');
-const usersRouter = require('./users.js');
-const questionRouter = require('./question.js');
+const router = require('express').Router()
+const sessionRouter = require('./session.js')
+const usersRouter = require('./users.js')
 const tagRouter = require('./tag.js')
+const questionRouter = require('./question.js')
 
-router.use('/session', sessionRouter);
+router.use('/session', sessionRouter)
 
-router.use('/users', usersRouter);
+router.use('/users', usersRouter)
 
-router.use('/question', questionRouter);
+router.use('/tag', tagRouter)
 
-router.use('/tag', tagRouter);
+router.use('/question', questionRouter)
 
-module.exports = router;
+// Might need to add question
+
+module.exports = router

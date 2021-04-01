@@ -13,6 +13,15 @@ router.get('/', async (req, res) => {
     return res.json(tags) // Goes to the store
 })
 
+router.post(
+    '/userTags',
+    asyncHandler(async (req, res) => {
+        const { userId, tagId } = req.body
+        const userTag = await UserTag.create({ tagId, userId })
+        if (userTag) return res.json({ userTag })
+    })
+)
+
 // Grab all usertags for front end to evaluate what tags are followed
 router.post('/usertags', asyncHandler(async (req, res) => {
     const { userId } = req.body;
@@ -22,42 +31,40 @@ router.post('/usertags', asyncHandler(async (req, res) => {
     return res.json(userTags); // Goes to the store
 }))
 
-// Create a tag association for users
-router.post(
-    '/:id',
-    // validateQuestion,
-    asyncHandler(async (req, res, next) => {
-        const { name, userId } = req.body;
-        const tagId = req.params.id;
+// // Create a tag association for users
+// router.post(
+// 	'/:id',
+// 	// validateQuestion,
+// 	asyncHandler(async (req, res, next) => {
+// 		const { name, userId } = req.body
+// 		const tagId = req.params.id
 
-        const userTag = UserTag.build({ userId, tagId });
+// 		const userTag = UserTag.build({ userId, tagId })
 
-        if (userTag) {
-            await userTag.save();
-            return res.json({ userTag }) // Goes to the store
-        } else {
-            const err = new Error('Post failed');
-            err.status = 401;
-            err.title = 'Post failed';
-            err.errors = ['The provided values were invalid.'];
-            return next(err);
-        }
-    }),
-);
+// 		if (userTag) {
+// 			await userTag.save()
+// 			return res.json({ userTag }) // Goes to the store
+// 		} else {
+// 			const err = new Error('Post failed')
+// 			err.status = 401
+// 			err.title = 'Post failed'
+// 			err.errors = ['The provided values were invalid.']
+// 			return next(err)
+// 		}
+// 	})
+// )
 
 // Delete a tag association for users
 router.delete(
     '/:id',
     asyncHandler(async (req, res, next) => {
-        const tagId = req.params.id;
-        const userId = req.body.userId;
-
+        const { userId, tagId } = req.body
         const deleteUserTag = await UserTag.findAll({
-            where: { userId, tagId }
+            where: { userId, tagId },
         })
         deleteUserTag.map(async (userTag) => await userTag.destroy())
-        return res.json('deleted');
+        return res.json({ userId })
     })
 )
 
-module.exports = router;
+module.exports = router

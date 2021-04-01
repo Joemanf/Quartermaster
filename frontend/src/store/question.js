@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const ASK_QUESTION = 'question/askQuestion';
+// const VIEW_QUESTION = ' question/viewQuestion'
 const REMOVE_QUESTION = 'question/removeQuestion';
 
 // ACTIONS
@@ -12,6 +13,13 @@ const askQuestion = (question) => {
     }
 }
 
+// const viewQuestion = (question) => {
+//     return {
+//         type: VIEW_QUESTION,
+//         payload: question,
+//     }
+// }
+
 // const removeQuestion = (question) => {
 //     return {
 //         type: REMOVE_QUESTION,
@@ -22,7 +30,7 @@ const askQuestion = (question) => {
 
 // THUNKS
 
-// export const viewQuestion = () => async dispatch => {
+// export const viewQuestions = () => async dispatch => {
 //     const res = await csrfFetch('/api/question');
 //     const data = await res.json();
 //     dispatch(askQuestion(data.question));
