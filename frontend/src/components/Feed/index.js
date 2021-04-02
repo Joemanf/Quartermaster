@@ -3,9 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import TagButtons from '../TagButtons/index'
 import {
-    getUserTags,
-    postUserTag,
-    deleteUserTag,
     showAllTags,
 } from '../../store/tag'
 import Questions from '../Questions'

@@ -10,10 +10,12 @@ module.exports = {
       },
       userId: {
         allowNull: false,
+        references: { model: "Users" },
         type: Sequelize.INTEGER
       },
       tagId: {
         allowNull: false,
+        references: { model: "Tags" },
         type: Sequelize.INTEGER
       },
       createdAt: {

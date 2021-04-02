@@ -38,6 +38,14 @@ function QuestionForm({ setShowModal }) {
 
     // console.log(tags)
 
+    const everyQuestion = useSelector((state) => state.question)
+
+    let questionArr = [];
+
+    for (const key in everyQuestion) {
+        questionArr.push(everyQuestion[key]);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
@@ -47,15 +55,17 @@ function QuestionForm({ setShowModal }) {
         for (const key in tag) {
             if (tag[key]) tagIds.push(key);
         }
-        console.log(id)
+        // console.log(id)
         const success = await dispatch(questionActions.postQuestion({ title, body, tagIds, userId }));
 
         if (success) {
             setTitle('');
             setBody('');
             tagArr = [];
+            const newQuestionArr = questionArr;
+            questionArr = [];
             setShowModal(false);
-            history.push('/') // CHANGE THIS
+            history.push(`/api/question/${newQuestionArr.length + 1}`) // CHANGE THIS TO /question/:id
         }
         else {
             console.log(success);

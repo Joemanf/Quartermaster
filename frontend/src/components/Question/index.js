@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { viewOneQuestion } from "../../store/question";
+import Answer from "../Answer";
 
-function Question({ userId }) {
+function Question() {
     const dispatch = useDispatch()
     const { id } = useParams()
     console.log(`id?`, id)
@@ -33,6 +34,7 @@ function Question({ userId }) {
         <>
             <h2>{title}</h2>
             <h4>{body}</h4>
+            <Answer questionId={id} />
         </>
     )
 }

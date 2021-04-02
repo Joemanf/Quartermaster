@@ -13,6 +13,10 @@ module.exports = {
         unique: true,
         type: Sequelize.STRING(30)
       },
+      userId: {
+        references: { model: 'Users' },
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.fn('now'),

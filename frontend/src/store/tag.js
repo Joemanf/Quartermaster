@@ -1,7 +1,6 @@
 import { csrfFetch } from './csrf';
 
 const LOAD = 'tag/load';
-const SHOW_USERTAGS = 'tag/showUserTags'
 const ASSOCIATE_USERTAG = 'tag/associateUserTag'
 const REMOVE_USERTAG = 'tag/removeUserTag'
 
@@ -29,13 +28,6 @@ const associateUserTag = (tag) => {
     }
 }
 
-const showUserTags = (tag) => {
-    return {
-        type: SHOW_USERTAGS,
-        payload: tag,
-    }
-}
-
 
 
 // THUNKS
@@ -43,24 +35,7 @@ export const showAllTags = () => async (dispatch) => {
     const res = await csrfFetch(`/api/tag`)
     if (res.ok) {
         const list = await res.json()
-        console.log(`'''''''''''''''''''''''''`, list)
         dispatch(load(list))
-        return list
-    } else return false
-}
-
-export const showAllUserTags = (userId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/tag/grab-user-tag`, {
-        method: 'POST',
-        body: JSON.stringify({
-            userId,
-        }),
-    });
-    console.log(`USER TAGS RES`, res)
-    if (res.ok) {
-        const list = await res.json()
-        console.log(`------------------`, list)
-        dispatch(showUserTags(list))
         return list
     } else return false
 }
@@ -74,16 +49,14 @@ export const postUserTag = (userId, tagId) => async (dispatch) => {
         }),
     })
     if (res.ok) {
-        const data = await res.json()
-        console.log(data)
-        dispatch(associateUserTag(data.userTag))
+        const { userTag } = await res.json()
+        dispatch(associateUserTag(userTag))
         return res
     } else return false
 }
 
 export const deleteUserTag = (userId, tagId) => async (dispatch) => {
     const res = await csrfFetch(`/api/tag/${tagId}`, {
-        // Change route
         method: 'DELETE',
         body: JSON.stringify({
             tagId,
@@ -115,23 +88,12 @@ const tagReducer = (state = initialState, action) => {
                 ...allTags,
                 ...state,
             }
+
         case ASSOCIATE_USERTAG:
-            newState = Object.assign({}, state) // Look here
-            newState[action.tag.tagId].userId = action.tag.userId
+            newState = Object.assign({}, state)
+            newState[action.tag.tagId].userId = action.tag.userId;
             return newState
 
-        case SHOW_USERTAGS:
-            const allUserTags = {}
-            allUserTags.userTags = {}
-            // console.log(`ACTION PAYLOAD`, action.payload)
-            action.payload.forEach((tag) => {
-                // console.log(tag)
-                allUserTags.userTags[tag.tagId] = tag
-            })
-            return {
-                ...allUserTags,
-                ...state,
-            }
         case REMOVE_USERTAG:
             newState = Object.assign({}, state)
             delete newState[action.tagId].userId

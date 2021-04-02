@@ -1,7 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../../config');
 
 const { secret, expiresIn } = jwtConfig;

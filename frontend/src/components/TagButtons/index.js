@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react'
 import { postUserTag, deleteUserTag, showAllUserTags } from '../../store/tag'
 import { useDispatch } from 'react-redux'
+// import db from '../../../../backend/db/models/index.js'
 
 const TagButtons = ({ everyTag, userId }) => {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(showAllUserTags(userId))
-    }, [dispatch])
+    const dispatch = useDispatch();
 
     let tags = [];
     everyTag.map(tag => {
@@ -15,6 +12,22 @@ const TagButtons = ({ everyTag, userId }) => {
             tags.push(tag)
         }
     })
+
+    // useEffect(() => {
+    //     // dispatch(showAllUserTags(userId))
+    //     // console.log(`HAHAHAHAHHAHAHHA`)
+    //     tags.forEach(tag => {
+    //         // return dispatch(postUserTag(undefined, tag.id))
+    //     })
+    // }, [dispatch])
+
+
+
+
+
+    // useEffect(() => {
+
+    // }, [dispatch])
 
     const userTags = everyTag[everyTag.length - 1]
 

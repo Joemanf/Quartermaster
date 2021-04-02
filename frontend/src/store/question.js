@@ -82,9 +82,12 @@ const questionReducer = (state = null, action) => {
     let newState;
     switch (action.type) {
         case ASK_QUESTION:
-            newState = Object.assign({}, state);
-            newState = action.payload;
-            return newState;
+            const postedQuestion = {};
+            postedQuestion[action.payload.id] = action.payload
+            return {
+                ...postedQuestion,
+                ...state
+            };
         case VIEW_QUESTION:
             const allQuestions = {}
             // console.log(`ACTION PAYLOAD`, action.payload)
