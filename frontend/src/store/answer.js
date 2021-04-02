@@ -25,7 +25,6 @@ const postAnAnswer = (answer) => {
 export const viewAnswers = (questionId) => async dispatch => {
     const res = await csrfFetch(`/api/answer/${questionId}`);
     const data = await res.json();
-    // console.log(`DATA QUESTIOOONNSSS`, data)
     dispatch(viewAnswer(data));
     return res;
 }
@@ -40,7 +39,6 @@ export const postAnswer = ({ body, userId, questionId }) => async dispatch => {
         })
     });
     const data = await res.json();
-    // console.log(`DATA QUESTIOOONNSSS`, data)
     dispatch(postAnAnswer(data.answer));
     return res;
 }
@@ -56,19 +54,19 @@ const answerReducer = (state = null, action) => {
         case VIEW_ANSWERS:
             const allAnswers = {}
             console.log(`ACTION PAYLOAD ANSWERS`, action.payload)
-            action.payload.forEach((answer) => {
-                allAnswers[answer.id] = answer
-            });
+            if (action.payload.length) {
+                action.payload.forEach((answer) => {
+                    allAnswers[answer.id] = answer
+                });
+            } else {
+
+            }
             return {
                 ...allAnswers,
-                ...state,
             }
         case POST_AN_ANSWER:
-            const answer = {}
-            // console.log(`ACTION PAYLOAD ANSWERS`, action.payload)
-            answer[action.payload.id] = action.payload
+            state[action.payload.id] = action.payload
             return {
-                answer,
                 ...state,
             }
         default:
