@@ -1,0 +1,11 @@
+body {
+    color: white;
+    /* background-color: #B28B84; */
+    /* background-color: #457EAC; */
+    background-color: #2D5D7B;
+}
+
+.top-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}

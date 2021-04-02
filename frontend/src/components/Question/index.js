@@ -25,11 +25,11 @@ function Question() {
 
 
     return (
-        <>
+        <div>
             <h2>{title}</h2>
             <h4>{body}</h4>
             <Answer questionId={id} />
-        </>
+        </div>
     )
 }
 

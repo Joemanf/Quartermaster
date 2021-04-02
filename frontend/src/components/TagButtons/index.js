@@ -1,6 +1,8 @@
 import { postUserTag, deleteUserTag } from '../../store/tag'
 import { useDispatch } from 'react-redux'
 
+import "./tag-button.css";
+
 const TagButtons = ({ everyTag, userId }) => {
     const dispatch = useDispatch();
 
@@ -20,19 +22,22 @@ const TagButtons = ({ everyTag, userId }) => {
         }
     }
     return (
-        <>
+        <div className='tag-button__outer'>
+            <h3>Tags</h3>
             {tags?.map((tag) => (
-                <button
-                    onClick={handleTag}
-                    id={tag.id}
-                    value={tag.userId ? 'un-follow' : 'follow'}
-                    key={`user-tags-${tag.id}`}
-                    name='follow-button'
-                >
-                    {tag.userId ? tag.name : `Follow-${tag.name}`}
-                </button>
+                <div className='tag-button__inner'>
+                    <button
+                        onClick={handleTag}
+                        id={tag.id}
+                        value={tag.userId ? 'un-follow' : 'follow'}
+                        key={`user-tags-${tag.id}`}
+                        name='follow-button'
+                    >
+                        {tag.userId ? tag.name : `Follow-${tag.name}`}
+                    </button>
+                </div>
             ))}
-        </>
+        </div>
     )
 }
 

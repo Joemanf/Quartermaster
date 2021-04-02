@@ -1,0 +1,10 @@
+.tag-button__outer {
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    margin: 1em;
+    padding: 1em;
+    /* border-style: ; */
+    border: 1em solid #341706;
+    background-color: #aa4404;
+}
