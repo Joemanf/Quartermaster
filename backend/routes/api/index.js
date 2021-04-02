@@ -15,6 +15,4 @@ router.use('/question', questionRouter)
 
 router.use('/answer', answerRouter)
 
-// Might need to add question
-
 module.exports = router

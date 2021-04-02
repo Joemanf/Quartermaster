@@ -46,10 +46,7 @@ export const postAnswer = ({ body, userId, questionId }) => async dispatch => {
 
 //REDUCER
 
-const initialState = { answer: null };
-
 const answerReducer = (state = null, action) => {
-    let newState;
     switch (action.type) {
         case VIEW_ANSWERS:
             const allAnswers = {}
@@ -58,8 +55,6 @@ const answerReducer = (state = null, action) => {
                 action.payload.forEach((answer) => {
                     allAnswers[answer.id] = answer
                 });
-            } else {
-
             }
             return {
                 ...allAnswers,

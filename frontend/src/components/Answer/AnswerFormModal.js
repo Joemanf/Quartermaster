@@ -11,28 +11,12 @@ function AnswerButton({ questionId }) {
             <button onClick={() => setShowModal(true)}>Answer this question</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <AnswerForm setShowModal={setShowModal} questionId={questionId} setShowModal={setShowModal} />
+                    <AnswerForm setShowModal={setShowModal} questionId={questionId} />
                 </Modal>
             )}
         </>
     );
 }
 
-// function QuestionFormModal() {
-//     const [showModal, setShowModal] = useState(false);
-
-//     return (
-//         <>
-//             <button onClick={() => setShowModal(true)}>Ask a Question</button>
-//             {showModal && (
-//                 <Modal onClose={() => setShowModal(false)}>
-//                     <QuestionForm setShowModal={setShowModal} />
-//                 </Modal>
-//             )}
-//         </>
-//     );
-// }
-
-// export default QuestionFormModal;
 
 export default AnswerButton

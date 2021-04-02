@@ -8,21 +8,15 @@ import {
 import Questions from '../Questions'
 
 function Feed() {
-    // const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(showAllTags())
     }, [dispatch])
 
-    // const userId = useSelector(state => state.session.user.id);
 
     const everyTag = useSelector((state) => Object.values(state.tag));
     const userId = useSelector((state) => state.session.user?.id)
-
-    // console.log(`EVERY USER TAG`, everyTag, 'userId', userId)
-
-    // const tagFollows = {};
 
     return (
         <>

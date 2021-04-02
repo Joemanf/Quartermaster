@@ -7,14 +7,14 @@ const REMOVE_USER = 'session/removeUser'
 
 const setUser = (user) => {
     return {
-        type: SET_USER, // Connects to switch below
+        type: SET_USER,
         payload: user,
     }
 }
 
 const removeUser = () => {
     return {
-        type: REMOVE_USER, // Connects to switch below
+        type: REMOVE_USER,
     }
 }
 
@@ -76,6 +76,7 @@ const sessionReducer = (state = initialState, action) => {
             newState = Object.assign({}, state)
             newState.user = action.payload
             return newState
+
         case REMOVE_USER:
             newState = Object.assign({}, state)
             newState.user = null

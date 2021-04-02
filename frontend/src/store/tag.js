@@ -84,7 +84,7 @@ const tagReducer = (state = initialState, action) => {
             action.list.forEach((tag) => {
                 allTags[tag.id] = tag
             })
-            return { // And look around here
+            return {
                 ...allTags,
                 ...state,
             }

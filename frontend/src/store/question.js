@@ -28,20 +28,11 @@ const viewSingleQuestion = (question) => {
     }
 }
 
-// const removeQuestion = (question) => {
-//     return {
-//         type: REMOVE_QUESTION,
-//         payload: question,
-//     }
-// }
-
-
 // THUNKS
 
 export const viewQuestions = () => async dispatch => {
     const res = await csrfFetch('/api/question');
     const data = await res.json();
-    // console.log(`DATA QUESTIOOONNSSS`, data)
     dispatch(viewQuestion(data));
     return res;
 }
@@ -49,7 +40,6 @@ export const viewQuestions = () => async dispatch => {
 export const viewOneQuestion = (questionId) => async dispatch => { // add to params
     const res = await csrfFetch(`/api/question/${questionId}`);
     const data = await res.json();
-    // console.log(`DATA QUESTIOOONNSSS`, data)
     dispatch(viewSingleQuestion(data));
     return res;
 }
@@ -76,8 +66,6 @@ export const postQuestion = ({ title, body, tagIds, userId }) => async dispatch 
 
 //REDUCER
 
-const initialState = { question: null };
-
 const questionReducer = (state = null, action) => {
     let newState;
     switch (action.type) {
@@ -88,9 +76,9 @@ const questionReducer = (state = null, action) => {
                 ...postedQuestion,
                 ...state
             };
+
         case VIEW_QUESTION:
             const allQuestions = {}
-            // console.log(`ACTION PAYLOAD`, action.payload)
             action.payload.forEach((question) => {
                 allQuestions[question.id] = question
             })
@@ -98,16 +86,14 @@ const questionReducer = (state = null, action) => {
                 ...allQuestions,
                 ...state,
             }
+
         case VIEW_A_QUESTION:
             const thisQuestion = {}
-            // console.log(`ACTION PAYLOAD`, action.payload)
             thisQuestion[action.payload.id] = action.payload
-            // action.payload.forEach((question) => {
-            //     thisQuestion[question.id] = question
-            // })
             return {
                 ...thisQuestion
             }
+
         case REMOVE_QUESTION:
             newState = Object.assign({}, state);
             newState.question = null;

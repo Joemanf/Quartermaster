@@ -1,8 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { viewOneQuestion, viewQuestions } from "../../store/question"
-import Answer from "../Answer"
+import { viewQuestions } from "../../store/question"
 
 function Questions({ userId }) {
     const dispatch = useDispatch()
@@ -10,10 +9,6 @@ function Questions({ userId }) {
     useEffect(() => {
         dispatch(viewQuestions())
     }, [dispatch])
-
-    // useEffect(() => {
-    //     dispatch(viewOneQuestion())
-    // }, [dispatch])
 
     const everyQuestion = useSelector((state) => state.question)
 

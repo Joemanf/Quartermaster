@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { viewAnswers } from "../../store/answer";
-import AnswerButton from "./AnswerFormModal"
 
 function AnswersList({ questionId }) {
 
@@ -9,7 +8,7 @@ function AnswersList({ questionId }) {
 
     useEffect(() => {
         dispatch(viewAnswers(questionId))
-    }, [dispatch])
+    }, [dispatch, questionId])
 
     const answers = useSelector((state) => state.answer)
     const answersArr = [];

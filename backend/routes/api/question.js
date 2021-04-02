@@ -24,23 +24,13 @@ const validateQuestion = [
 
 // View all questions associated with user's feed
 router.get('/', asyncHandler(async (req, res) => {
-
-    // 1.) Get the UserId of the user logged in
-    // 2.) Get the tags associated with that user
-    // 3.) Get the questions associated with that tag
-    // 4.) Send back all of those questions
-    // const token = req.get()
-    // console.log(token)
-    // res.json({ req })
-
     const id = await getCurrentUserId(req);
-
     const userTags = await UserTag.findAll({
         where: { userId: id }
     })
 
-    console.log(`User time? Yes? Please?`, userTags)
     const questions = await Question.findAll({
+        // Change ability to view feed questions here
         // include: { Users }
         // where: { id: tagId }
     });
@@ -64,10 +54,7 @@ router.post(
     asyncHandler(async (req, res, next) => {
         const { title, body, tagIds, userId } = req.body;
 
-        // console.log(req.body)
-
         const question = Question.build({ title, body, userId });
-
 
         const validatorErrors = validationResult(req);
 

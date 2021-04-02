@@ -7,27 +7,21 @@ import Answer from "../Answer";
 function Question() {
     const dispatch = useDispatch()
     const { id } = useParams()
-    console.log(`id?`, id)
 
     useEffect(() => {
         dispatch(viewOneQuestion(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
     const question = useSelector((state) => state.question)
-
-    // console.log(`Question?`, question);
 
     let title;
     let body;
 
 
     if (question) {
-        // console.log(`Question title?`, question[id])
         title = question[id].title;
         body = question[id].body;
     }
-
-    console.log(`Body and Title?`, body, title);
 
 
     return (

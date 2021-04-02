@@ -1,35 +1,15 @@
-import React, { useEffect } from 'react'
-import { postUserTag, deleteUserTag, showAllUserTags } from '../../store/tag'
+import { postUserTag, deleteUserTag } from '../../store/tag'
 import { useDispatch } from 'react-redux'
-// import db from '../../../../backend/db/models/index.js'
 
 const TagButtons = ({ everyTag, userId }) => {
     const dispatch = useDispatch();
 
     let tags = [];
-    everyTag.map(tag => {
+    everyTag.forEach(tag => {
         if (tag.id) {
             tags.push(tag)
         }
     })
-
-    // useEffect(() => {
-    //     // dispatch(showAllUserTags(userId))
-    //     // console.log(`HAHAHAHAHHAHAHHA`)
-    //     tags.forEach(tag => {
-    //         // return dispatch(postUserTag(undefined, tag.id))
-    //     })
-    // }, [dispatch])
-
-
-
-
-
-    // useEffect(() => {
-
-    // }, [dispatch])
-
-    const userTags = everyTag[everyTag.length - 1]
 
     const handleTag = async (e) => {
         if (e.target.value === 'follow') {

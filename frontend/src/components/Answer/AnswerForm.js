@@ -1,7 +1,3 @@
-// useEffect(() => {
-//     dispatch(postAnswer(questionId));  // body, userId, questionId
-// })
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAnswer } from "../../store/answer";
