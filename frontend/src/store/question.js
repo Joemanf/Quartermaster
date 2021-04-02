@@ -33,7 +33,9 @@ const viewSingleQuestion = (question) => {
 export const viewQuestions = () => async dispatch => {
     const res = await csrfFetch('/api/question');
     const data = await res.json();
-    dispatch(viewQuestion(data));
+    // Tags comes back as an array of objects
+    // console.log(`VIEW QUESTIONS DATA:`, data)
+    dispatch(viewQuestion(data)); // This expects an array of objects
     return res;
 }
 
@@ -79,6 +81,7 @@ const questionReducer = (state = null, action) => {
 
         case VIEW_QUESTION:
             const allQuestions = {}
+            // console.log(`Here's the payload!!!!!!!!`, action.payload)
             action.payload.forEach((question) => {
                 allQuestions[question.id] = question
             })

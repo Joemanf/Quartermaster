@@ -22,9 +22,6 @@ function App() {
           <Route exact path="/">
             <Feed />
           </Route>
-          <Route path="/test" >
-            <div>Hey.</div>
-          </Route>
           <Route path={`/api/question/:id`}>
             <Question />
           </Route>

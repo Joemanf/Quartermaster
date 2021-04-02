@@ -7,7 +7,8 @@ const { secret, expiresIn } = jwtConfig;
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { getCurrentUserId } = require('../../utils/auth');
-const { Question, QuestionTag, UserTag } = require('../../db/models');
+const { Question, QuestionTag, UserTag, Tag } = require('../../db/models');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -29,12 +30,32 @@ router.get('/', asyncHandler(async (req, res) => {
         where: { userId: id }
     })
 
+    let userTagsArr = [];
+    userTags.forEach(tag => userTagsArr.push(tag.tagId))
+    // console.log(`USER TAGS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`, userTagsArr)
+
+    // This contains the tags filled with the questions. It can be sent back
+    // const tags = await Tag.findAll({
+    //     where: {
+    //         id: {
+    //             [Op.or]: userTagsArr
+    //         }
+    //     },
+    //     include: {
+    //         model: Question
+    //     }
+    // })
+
+    // console.log(`TAGS AND QUESTIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`, tags)
+
+
     const questions = await Question.findAll({
         // Change ability to view feed questions here
         // include: { Users }
         // where: { id: tagId }
     });
 
+    //send tags or questions
     return res.json(questions)
 }))
 
