@@ -27,8 +27,24 @@ function App() {
         <Switch>
           <Route exact path="/">
             <div className='top-grid'>
-              <TagButtons everyTag={everyTag} userId={userId} />
-              <Feed userId={userId} />
+              {
+                userId
+                  ?
+                  <>
+                    <TagButtons everyTag={everyTag} userId={userId} />
+                    <Feed userId={userId} />
+                  </>
+                  :
+                  <>
+                    <div className='filler-div'></div>
+                    <div className='splash'>
+                      <h1 className="splash-h1">Welcome to Quartermaster!</h1>
+                      <h2 className="splash-h2">Log in to join the fun!</h2>
+                    </div>
+                  </>
+              }
+              {/* <TagButtons everyTag={everyTag} userId={userId} />
+              <Feed userId={userId} /> */}
             </div>
           </Route>
           <Route path={`/api/question/:id`}>

@@ -9,3 +9,25 @@ body {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
 }
+
+.splash {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    padding: 1em;
+    align-items: center;
+    /* border: 4em groove #B28B84; */
+    border: 4em groove #883e10;
+    background-color: #aa4404;
+    text-align: center;
+}
+
+.splash-h1 {
+    font-size: 100px;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+.splash-h2{
+    font-size: 50px;
+}
