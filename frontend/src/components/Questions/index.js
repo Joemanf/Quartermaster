@@ -10,7 +10,7 @@ function Questions({ userId }) {
 
     useEffect(() => {
         dispatch(viewQuestions())
-    }, [dispatch])
+    }, [dispatch, userId])
 
     const everyQuestion = useSelector((state) => state.question)
 
