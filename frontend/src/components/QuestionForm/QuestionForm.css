@@ -1,3 +1,48 @@
 #modal-content {
     width: 40em;
+    border: 4em groove #924211;
+    background-color: #2D5D7B;
+}
+
+#modal-content form {
+    width: 80%;
+}
+
+.question-title, .question-body, .question-tags {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.question-title input {
+    height: 3em;
+    font-size: 1.5em;
+    width: 20em;
+    overflow-x: auto;
+}
+
+.question-body textarea {
+    height: 10em;
+    width: 36em;
+}
+
+.question-title input, .question-body textarea{
+    text-align: center;
+}
+
+.tags-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.tags-content div {
+    width: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tags-content input, .tags-content label  {
+    margin: .2em;
 }

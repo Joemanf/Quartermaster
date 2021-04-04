@@ -13,18 +13,25 @@ function AnswersList({ questionId }) {
     const answers = useSelector((state) => state.answer)
     const answersArr = [];
 
+
     for (const key in answers) {
         answersArr.push(answers[key])
     }
 
     console.log(answersArr)
 
+
     return (
         <>
-            {answersArr.map(answer => (
-                <p>{answer.body}</p>
+            {answersArr.map(answer => {
 
-            ))}
+                return (
+                    <div className='each-answer'>
+                        <p>{answer.body}</p>
+                        <p>{answer.User?.username}</p>
+                    </div>
+                )
+            })}
         </>
     )
 }

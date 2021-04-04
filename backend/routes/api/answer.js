@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { Answer } = require('../../db/models');
+const { Answer, User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -10,7 +10,8 @@ router.get('/:questionId', asyncHandler(async (req, res) => {
     const answers = await Answer.findAll({
         where: {
             questionId
-        }
+        },
+        include: { model: User }
     });
     return res.json(answers)
 }))

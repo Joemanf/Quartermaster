@@ -7,14 +7,14 @@ function AnswerButton({ questionId }) {
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <>
-            <button onClick={() => setShowModal(true)}>Answer this question</button>
+        <div className='answer-button-container'>
+            <button className='answer-button' onClick={() => setShowModal(true)}>Answer this question</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <AnswerForm setShowModal={setShowModal} questionId={questionId} />
                 </Modal>
             )}
-        </>
+        </div>
     );
 }
 

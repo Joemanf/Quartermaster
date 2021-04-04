@@ -68,48 +68,56 @@ function QuestionForm({ setShowModal }) {
                     <li key={idx}>{error}</li>
                 ))}
             </ul>
-            <label>
-                Title
-        <input
+            <div className='question-title'>
+                <label>
+                    Title
+            </label>
+                <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
                 />
+            </div>
+            <div className='question-body'>
+                <label>
+                    Body
             </label>
-            <label>
-                Body
-        <textarea
+                <textarea
                     name="body"
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                     required
                 />
+            </div>
+            <div className='question-tags'>
+                <label>
+                    Tags
             </label>
-            <label>
-                Tags
+                <div className='tags-content'>
+                    {tagArr.map((obj) => {
+                        return (
+                            <div key={`div_${obj.id}`}>
+                                <input
+                                    type="checkbox"
+                                    id={`${obj.id}-genre-checkbox`}
+                                    key={obj.id}
+                                    name={obj.name}
+                                    onClick={e => {
+                                        const checkbox = document.getElementById(`${obj.id}-genre-checkbox`);
+                                        checkbox.checked ? checkboxInput = true : checkboxInput = false;
+                                        const id = obj.id;
 
-                {tagArr.map((obj) => {
-                return (
-                    <div key={`div_${obj.id}`}>
-                        <input
-                            type="checkbox"
-                            id={`${obj.id}-genre-checkbox`}
-                            key={obj.id}
-                            name={obj.name}
-                            onClick={e => {
-                                const checkbox = document.getElementById(`${obj.id}-genre-checkbox`);
-                                checkbox.checked ? checkboxInput = true : checkboxInput = false;
-                                const id = obj.id;
+                                        setTag({ ...tag, [id]: checkboxInput });
+                                    }}
+                                />
+                                <label htmlFor={obj.name}>{obj.name}</label>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
 
-                                setTag({ ...tag, [id]: checkboxInput });
-                            }}
-                        />
-                        <label htmlFor={obj.name}>{obj.name}</label>
-                    </div>
-                )
-            })}
-            </label>
             <button type="submit">Post</button>
         </form>
     );

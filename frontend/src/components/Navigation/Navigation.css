@@ -11,7 +11,7 @@
     margin-bottom: 1em;
     padding: 1em;
     /* border: 1px solid black; */
-    background-color: #457EAC;
+    background-color: #457eacda;
     box-shadow: 0 8px rgba(0, 0, 0, .2);
 }
 
@@ -19,6 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    /* transition: all .25s ease; */
     /* padding: 1em; */
 }
 
@@ -30,42 +31,42 @@
     padding: .5em;
     border: 1px solid black;
     background-color: white;
-    height: 4em;
+    color: black;
+    height: 8em;
     /* transition: margin-top .25s; */
 }
 
-.profile-dropdown:active {
-    transition: margin-top 3s;
-}
-/* 
-.nav-container div {
-    margin: 1em;
+.profile-dropdown li {
+    margin: .5em 0;
 }
 
-.nav-container a {
-    margin: 0.5em;
+.nav-container button {
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, .2);
+    padding: .5em;
+    background-color: #4f8cbe;
+    color: white;
 }
 
-.fa-smile{
-    font-size: 2em;
+.nav-container button:focus {
+    outline: none;
 }
 
-.profile-dropdown{
-    padding: 0;
+
+#logout {
+    box-shadow: none;
 }
 
-.profile-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 1em;
+.questions-contents:hover {
+    padding-top: 1.25em;
+    
 }
 
-.profile-box ul {
-    text-align: end;
+.all-questions a:active {
+    position: relative;
+    border: 4px ridge #883a0a;
+    top: 3px;
 }
 
-.profile-button{
-    width: 3em;
-    height: 3em;
-} */
+.signup {
+    margin-left: 1em;
+}

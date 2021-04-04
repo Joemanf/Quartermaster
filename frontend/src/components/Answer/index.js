@@ -1,6 +1,8 @@
 import AnswerFormModal from "./AnswerFormModal"
 import AnswersList from "./AnswersList"
 
+import "./Answer.css"
+
 function Answer({ questionId }) {
 
     return (

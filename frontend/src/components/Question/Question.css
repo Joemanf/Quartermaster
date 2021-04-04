@@ -1,0 +1,23 @@
+.question-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    margin: 1em;
+    padding: 1em;
+    max-width: 100%;
+    min-width: 50%;
+    border: 4em groove #883e10;
+    background-color: #aa4404;
+}
+
+.title-body {
+    /* width: 10em; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
+}
+
+.question-title-page {
+
+}

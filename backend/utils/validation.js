@@ -4,6 +4,8 @@ const { validationResult } = require('express-validator');
 const handleValidationErrors = (req, _res, next) => {
     const validationErrors = validationResult(req);
 
+    console.log(`THESE ARE ERRORS ~~~~~~~~~~~~~~~~~~~~~~~`, validationErrors)
+
     if (!validationErrors.isEmpty()) {
         const errors = validationErrors
             .array()
