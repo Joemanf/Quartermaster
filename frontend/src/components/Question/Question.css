@@ -16,8 +16,9 @@
     flex-direction: column;
     align-items: center;
     font-size: 2em;
+    text-align: center;
 }
 
 .question-title-page {
-
+    margin-bottom: .5em;
 }

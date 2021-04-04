@@ -22,7 +22,7 @@ function Questions({ userId }) {
 
     return (
         <div className='all-questions'>
-            <h3>Questions</h3>
+            <h3 className="all-questions-h3">Questions</h3>
             {questionArr.map(question => (
                 <Link
                     key={question.id}

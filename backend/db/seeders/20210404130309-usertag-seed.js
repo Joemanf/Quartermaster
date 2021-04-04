@@ -12,6 +12,10 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
+    return queryInterface.bulkInsert('UserTags', [
+      { userId: 1, tagId: 1, createdAt: new Date(), updatedAt: new Date() },
+      { userId: 1, tagId: 2, createdAt: new Date(), updatedAt: new Date() }
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {
@@ -22,5 +26,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
+    return queryInterface.bulkDelete('UserTags', null, {});
   }
 };
