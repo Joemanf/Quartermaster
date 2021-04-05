@@ -31,13 +31,19 @@
     text-align: center;
 }
 
+.question-tags {
+    width: 36em;
+}
+
 .tags-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .tags-content div {
     width: 5em;
+    margin: 0.25em 2em;
+    width: 8em;
     display: flex;
     justify-content: center;
     align-items: center;
